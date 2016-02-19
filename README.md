@@ -78,4 +78,5 @@ As root, create the tools directory and a symbolic link to it on the host system
 sudo mkdir -v $LFS/tools
 sudo ln -sv $LFS/tools /
 ```
-
+TODO : Write what was done after
+#### Chapter V - Constructing a Temporary System
