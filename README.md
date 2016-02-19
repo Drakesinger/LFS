@@ -68,9 +68,14 @@ force_color_prompt=yes
 ```
 
 ##### Mounting the partition:
-
-`mkdir -pv $LFS` Why put the -p flag? -> check doc and write here
-```bash
-mount -v -t ext4 /dev/sdb1 $LFS
-```
+`mkdir -pv $LFS` Why put the -p flag? -> check doc and write here <br>
+`mount -v -t ext4 /dev/sdb1 $LFS` Mount the partition
 #### Chapter III - Packages and Patches
+Downloaded all sources by using the wget-list.txt provided by the LFS author/team.
+#### Chapter IV - Final Preparations
+As root, create the tools directory and a symbolic link to it on the host system.
+```bash
+sudo mkdir -v $LFS/tools
+sudo ln -sv $LFS/tools /
+```
+
