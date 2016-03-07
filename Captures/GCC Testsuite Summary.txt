@@ -1,0 +1,53 @@
+		=== g++ Summary ===
+
+# of expected passes		91907
+# of unexpected successes	2
+# of expected failures		339
+# of unsupported tests		3441
+/sources/gcc-build/gcc/testsuite/g++/../../xg++  version 5.2.0 (GCC) 
+
+--
+		=== gcc Summary ===
+
+# of expected passes		112986
+# of unexpected failures	5
+# of expected failures		261
+# of unsupported tests		1616
+/sources/gcc-build/gcc/xgcc  version 5.2.0 (GCC) 
+
+--
+		=== libatomic Summary ===
+
+# of expected passes		44
+# of unsupported tests		5
+		=== libgomp tests ===
+
+
+Running target unix
+--
+		=== libgomp Summary ===
+
+# of expected passes		1617
+# of unsupported tests		170
+		=== libitm tests ===
+
+
+Running target unix
+--
+		=== libitm Summary ===
+
+# of expected passes		26
+# of expected failures		3
+# of unsupported tests		1
+		=== libstdc++ tests ===
+
+
+--
+		=== libstdc++ Summary ===
+
+# of expected passes		10260
+# of expected failures		65
+# of unsupported tests		278
+
+Compiler version: 5.2.0 (GCC) 
+Platform: i686-pc-linux-gnu
