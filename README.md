@@ -1,7 +1,7 @@
 # LFS
 Linux From Scratch
 
-## Log
+## Work Log
 
 ### Prerequisites
 Problem with git.
@@ -96,7 +96,7 @@ $ readelf -l <binary_file_name> | grep interpreter
 
 #### Chapter VI
 
-Entering the Chroot environment
+* Entering the Chroot environment
 ```bash
 chroot "$LFS" /tools/bin/env -i \
 HOME=/root \
@@ -107,30 +107,26 @@ PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
 ```
 
 
-Locales:
+* Locales:
 ```bash
 localedef -i fr_CH -f UTF-8 fr_CH.UTF-8
 localedef -i fr_CH -f ISO-8859-1 fr_CH
 ```
 
-Notes: Don't forget to run the tests on ACL.
+Notes: 
+
+Don't forget to run the tests on ACL.
 Kept the sources, delete after.
 
-Shadow: left <code>GROUP=999</code> by default
-Changed CREATE_MAIL_SPOOL=no
-using <code>sed -i 's/yes/no/' /etc/default/useradd</code>
+* Shadow
+    * left <code>GROUP=999</code> by default
+    * Changed CREATE_MAIL_SPOOL=no
+        using <code>sed -i 's/yes/no/' /etc/default/useradd</code>
 
-#### Not Tested:
+##### Testsuites not run:
 
 * Libtool-2.4 
-    
-    Did not launch the test suite.
-    Letting the extracted sources there to be tested after automake is installed
-
 * Inetutils-1.9.4
-        
-    Not running tests. Run at end.
-
 * Perl
 * Autoconf
 * Automake
@@ -146,22 +142,24 @@ using <code>sed -i 's/yes/no/' /etc/default/useradd</code>
 
 * XZ-5.2.1
 
-Problem after installation.
-```bash
-ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so
-```
-Looks weird. However, after some study. (and using <code> ls -lFahH --color </code>)
-
-The symbolic link /usr/lib/liblzma.so will point to:
-
-```bash
-lrwxrwxrwx  1 root root    26 Mar  7 16:29 liblzma.so -> ../../lib/liblzma.so.5.2.1*
-```
-
-/lib is the root, may have been easier to point dirrectly to /lib insted of ../../lib.
-Looks like acctually all symbolic links to libraries not in the user use the same type of paths.
+	Problem after installation.
+	```bash
+	ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so
+	```
+	However, after some study (and using <code> ls -lFahH --color </code>):
+	
+	The symbolic link /usr/lib/liblzma.so will point to
+	
+	```bash
+	lrwxrwxrwx  1 root root    26 Mar  7 16:29 liblzma.so -> ../../lib/liblzma.so.5.2.1*
+	```
+	
+	/lib is the root, may have been easier to point directly to /lib insted of ../../lib.
+    This is made in case the user does not exist?
+    
+	Looks like acctually all symbolic links to libraries not in the user use the same type of paths.
 
 * Kmod Problem
 
-   Last symbolic link could not be created. Tried to remake the package -> failure. had to restore back to a previous image.
-   After rebuilding and modifying everything from the Autoconf tool, everything works.
+    Last symbolic link could not be created. Tried to remake the package -> failure. had to restore back to a previous image.
+    After rebuilding and modifying everything from the Autoconf tool, everything works.
