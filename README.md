@@ -163,3 +163,139 @@ Kept the sources, delete after.
 
     Last symbolic link could not be created. Tried to remake the package -> failure. had to restore back to a previous image.
     After rebuilding and modifying everything from the Autoconf tool, everything works.
+
+* Eudev
+
+    Command to update hardware device info:
+    ```bash
+    LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update
+    ```
+    Needs to be run after every hardware update
+    
+#### Chapter 7 - Configuration
+
+In order to share stuff between the debian machine and everything else I set up git.
+The IP address of the virtual machine was wrong and had to renew the lease.
+Done with: 
+```bash
+$ sudo dhclient -r eth0
+$ sudo dhclient eth0
+```
+
+Configuring the linux console, keymap setup is a bit more complicated since on debian and the man pages for 
+dumpkeys / keymaps / loadkeys all point to a location that is not valid on a debian system.
+
+File usr/share/connsole-setup/console-setup content:
+```bash
+CHARMAP=guess
+
+CODESET=guess
+FONTFACE=TerminusBold
+FONTSIZE=16
+```
+
+After trying to read the documentation and getting a headache. Honestly, this is one of the worst documentation I have ever seen.
+Trying to retrieve the charset of the current console, the font used, the keymaps is simply stupid and un-doable.
+Configured the console as such:
+
+```bash
+cat > /etc/sysconfig/console << "EOF"
+# Begin /etc/sysconfig/console
+UNICODE="1"
+KEYMAP="qwertz/fr_CH"
+FONT="lat2-16 -m 8859-15"
+# End /etc/sysconfig/console
+EOF
+```
+Notes
+
+Font: no idea, cannot determine from the Terminus font readme which should be used and the [Francophone HOW-TO](http://www.tldp.org/HOWTO/Francophones-HOWTO-5.html#ss5.4)
+is simply impossible to read.
+
+sysconfig/rc.site configuration
+```bash
+DISTRO="LFS-10-Mars-2016" # The distro name
+DISTRO_CONTACT="horiamut@msn.com" # Bug report address
+DISTRO_MINI="LFS-10-Mars-2016" # Short name used in filenames for distro config
+
+[...]
+
+# Write out fsck progress if yes
+VERBOSE_FSCK=yes
+```
+```bash
+root:/etc# LC_ALL=fr_CH.iso88591 locale charmap
+ISO-8859-1
+root:/etc# LC_ALL=fr_CH.iso88591 locale language
+French
+root:/etc# LC_ALL=fr_CH.iso88591 locale int_curr_symbol
+CHF 
+root:/etc# LC_ALL=fr_CH.iso88591 locale int_prefix     
+41
+root:/etc# 
+```
+
+```bash
+cat > /etc/profile << "EOF"
+# Begin /etc/profile
+export LANG=fr_CH.ISO-8859-1
+# End /etc/profile
+EOF
+```
+
+FSTAB
+```bash
+cat > /etc/fstab << "EOF"
+# Begin /etc/fstab
+# file system / mount-point / filesystem type / options / dump / fsck
+# order
+/dev/sdb1   /               ext4            defaults                1   1
+/dev/sdb5   swap            swap            pri=1                   0   0
+proc        /proc           proc            nosuid,noexec,nodev     0   0
+sysfs       /sys            sysfs           nosuid,noexec,nodev     0   0
+devpts      /dev/pts        devpts          gid=5,mode=620          0   0
+tmpfs       /run            tmpfs           defaults                0   0
+devtmpfs    /dev            devtmpfs        mode=0755,nosuid        0   0
+/dev/sr0    /media/cdrom0   udf,iso9660     user,noauto             0   0
+# End /etc/fstab
+EOF
+```
+```bash
+make mrproper
+make defconfig
+
+make menuconfig
+CONFIG_LOCALVERSION="LFS-Horia-Mut-10-Mar-16"
+
+make
+```
+
+GRUB Config
+----------------------
+```bash
+grub-install /dev/sda
+```
+
+```bash
+cat > /boot/grub/grub.cfg << "EOF"
+# Begin /boot/grub/grub.cfg
+set default=0
+set timeout=5
+insmod ext2
+set root=(hd1,1)
+menuentry "GNU/Linux, Linux 4.2-lfs-7.8 by Mut Horia" {
+linux /boot/vmlinuz-4.2-lfs-7.8 root=/dev/sdb1 ro
+}
+EOF
+```
+
+THE End
+-------------------------
+```bash
+cat > /etc/lsb-release << "EOF"
+DISTRIB_ID="Linux From Scratch"
+DISTRIB_RELEASE="7.8"
+DISTRIB_CODENAME="LFS by Horia Mut"
+DISTRIB_DESCRIPTION="Linux From Scratch"
+EOF
+```
