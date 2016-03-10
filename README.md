@@ -1,9 +1,11 @@
 # LFS
-Linux From Scratch
+Linux From Scratch Project
 
-## Work Log
+# Work Log
 
-### Prerequisites
+# Prerequisites
+In order to share files between systems, the git program was used.
+
 Problem with git.
 ```bash
 WARNING: gnome-keyring:: couldn't connect to: /home/[user_name]/.cache/keyring-[generated_string]/pkcs11
@@ -11,20 +13,22 @@ WARNING: gnome-keyring:: couldn't connect to: /home/[user_name]/.cache/keyring-[
 Solutions found @ [Debian Forums](https://lists.debian.org/debian-user/2014/05/msg00070.html) & [Solved Programming Problems](http://hongouru.blogspot.ch/2012/07/solved-warning-gnome-keyring-couldnt.html)
 
 
-### Part I - Introduction
+# Part I - Introduction
 
-#### Chapter I
+## Chapter I
 Just reading, nothing of note.
 
-### Part II - Preparing for the Build
+# Part II - Preparing for the Build
 
-#### Chapter II - Preparing a new Partition
-Problem : only have 1 partition and it's the bootable one.
+## Chapter II - Preparing a new Partition
+In this chapter we need to create a new partition where the LFS Linux kernel will be located.
+
+The problem : only have 1 partition and it's the bootable one.
 
 Solution for VM : add a new harddrive of 12GB
 
 HardDrive is located in /dev/sdb (port 2 SATA)
-- add the 10240MB partition with 
+- add the 10240MB partition with
 ```bash
 cfdisk /dev/sdb
 ```
@@ -36,14 +40,14 @@ Reboot the machine with the Ubuntu USB stick inserted. Boot on the Live Ubuntu I
 
 [Source](http://askubuntu.com/questions/291888/can-i-adjust-reduce-my-partition-size-for-ubuntu)
 
-##### Make file system:
+### Make file system:
 
-In order to see the number of the partition one must run: 
+In order to see the number of the partition one must run:
 
 ```bash
 fdisk -l
 ```
- 
+
 Then using the IDs of the partitions:
 ```bash
 mkfs -v -t ext4 /dev/sdb1
@@ -55,7 +59,7 @@ After the filesystem has been created:
 export LFS=/mnt/lfs
 ```
 
-Added the export within the .bashrc and /root/.bashrc -> otherwise the env variable is 
+Added the export within the .bashrc and /root/.bashrc -> otherwise the env variable is
 forgotten when leaving the terminal.
 
 Note: [What's the difference between .bashrc, .bash_profile, and .environment?](http://stackoverflow.com/questions/415403/whats-the-difference-between-bashrc-bash-profile-and-environment)
@@ -88,12 +92,12 @@ Config.guess: i686-pc-linux-gnu
 
 Dynamic linker: ld-linux.so.2
 
-Command : 
+Command :
 ```bash
 $ readelf -l <binary_file_name> | grep interpreter
 [Requesting program interpreter: /lib/ld-linux.so.2]
 ```
-
+# Part III - Building the LFS System
 #### Chapter VI
 
 * Entering the Chroot environment
@@ -113,7 +117,7 @@ localedef -i fr_CH -f UTF-8 fr_CH.UTF-8
 localedef -i fr_CH -f ISO-8859-1 fr_CH
 ```
 
-Notes: 
+Notes:
 
 Don't forget to run the tests on ACL.
 Kept the sources, delete after.
@@ -125,7 +129,7 @@ Kept the sources, delete after.
 
 ##### Testsuites not run:
 
-* Libtool-2.4 
+* Libtool-2.4
 * Inetutils-1.9.4
 * Perl
 * Autoconf
@@ -134,8 +138,8 @@ Kept the sources, delete after.
 * GetText
 * Gperf
 * GROFF
-    
-    Configured with the following: 
+
+    Configured with the following:
     ```bash
     PAGE=A4 ./configure --prefix=/usr
     ```
@@ -147,16 +151,16 @@ Kept the sources, delete after.
 	ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so
 	```
 	However, after some study (and using <code> ls -lFahH --color </code>):
-	
+
 	The symbolic link /usr/lib/liblzma.so will point to
-	
+
 	```bash
 	lrwxrwxrwx  1 root root    26 Mar  7 16:29 liblzma.so -> ../../lib/liblzma.so.5.2.1*
 	```
-	
+
 	/lib is the root, may have been easier to point directly to /lib insted of ../../lib.
     This is made in case the user does not exist?
-    
+
 	Looks like acctually all symbolic links to libraries not in the user use the same type of paths.
 
 * Kmod Problem
@@ -171,18 +175,18 @@ Kept the sources, delete after.
     LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update
     ```
     Needs to be run after every hardware update
-    
+
 #### Chapter 7 - Configuration
 
 In order to share stuff between the debian machine and everything else I set up git.
 The IP address of the virtual machine was wrong and had to renew the lease.
-Done with: 
+Done with:
 ```bash
 $ sudo dhclient -r eth0
 $ sudo dhclient eth0
 ```
 
-Configuring the linux console, keymap setup is a bit more complicated since on debian and the man pages for 
+Configuring the linux console, keymap setup is a bit more complicated since on debian and the man pages for
 dumpkeys / keymaps / loadkeys all point to a location that is not valid on a debian system.
 
 File usr/share/connsole-setup/console-setup content:
@@ -229,10 +233,10 @@ ISO-8859-1
 root:/etc# LC_ALL=fr_CH.iso88591 locale language
 French
 root:/etc# LC_ALL=fr_CH.iso88591 locale int_curr_symbol
-CHF 
+CHF
 root:/etc# LC_ALL=fr_CH.iso88591 locale int_prefix     
 41
-root:/etc# 
+root:/etc#
 ```
 
 ```bash
