@@ -1,0 +1,81 @@
+root:/sources/gcc-build# ../gcc-5.2.0/contrib/test_summary        
+cat <<'EOF' |
+LAST_UPDATED: Obtained from SVN: tags/gcc_5_2_0_release revision 225865
+
+Native configuration is i686-pc-linux-gnu
+
+		=== g++ tests ===
+
+
+Running target unix
+XPASS: g++.dg/tls/thread_local-order2.C  -std=c++11 execution test
+XPASS: g++.dg/tls/thread_local-order2.C  -std=c++14 execution test
+
+		=== g++ Summary ===
+
+# of expected passes		91907
+# of unexpected successes	2
+# of expected failures		339
+# of unsupported tests		3441
+/sources/gcc-build/gcc/testsuite/g++/../../xg++  version 5.2.0 (GCC) 
+
+		=== gcc tests ===
+
+
+Running target unix
+FAIL: gcc.dg/pr45352-1.c (test for excess errors)
+FAIL: gcc.dg/pr63914.c (test for excess errors)
+FAIL: c-c++-common/ubsan/object-size-10.c   -O2  execution test
+FAIL: c-c++-common/ubsan/object-size-10.c   -O2 -flto -fno-use-linker-plugin -flto-partition=none  execution test
+FAIL: c-c++-common/ubsan/object-size-10.c   -O2 -flto -fuse-linker-plugin -fno-fat-lto-objects  execution test
+
+		=== gcc Summary ===
+
+# of expected passes		112986
+# of unexpected failures	5
+# of expected failures		261
+# of unsupported tests		1616
+/sources/gcc-build/gcc/xgcc  version 5.2.0 (GCC) 
+
+		=== libatomic tests ===
+
+
+Running target unix
+
+		=== libatomic Summary ===
+
+# of expected passes		44
+# of unsupported tests		5
+		=== libgomp tests ===
+
+
+Running target unix
+
+		=== libgomp Summary ===
+
+# of expected passes		1617
+# of unsupported tests		170
+		=== libitm tests ===
+
+
+Running target unix
+
+		=== libitm Summary ===
+
+# of expected passes		26
+# of expected failures		3
+# of unsupported tests		1
+		=== libstdc++ tests ===
+
+
+Running target unix
+
+		=== libstdc++ Summary ===
+
+# of expected passes		10260
+# of expected failures		65
+# of unsupported tests		278
+
+Compiler version: 5.2.0 (GCC) 
+Platform: i686-pc-linux-gnu
+configure flags: --prefix=/usr --enable-languages=c,c++ --disable-multilib --disable-bootstrap --with-system-zlib
