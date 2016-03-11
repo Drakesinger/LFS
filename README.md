@@ -454,7 +454,8 @@ nameserver <IP address of your secondary nameserver>
 EOF
 ```
 However, it was modified as in the following screenshot to be in accord with the network at school:
-[Image](.\Captures\Network Configuration HE-ARC.PNG)
+
+![Image](.\Captures\Network Configuration HE-ARC.PNG)
 
 In order to share stuff between the debian machine and everything else I set up git.
 The IP address of the virtual machine was wrong and had to renew the lease.
