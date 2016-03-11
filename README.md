@@ -374,13 +374,21 @@ Some of the packages however, had some changes we needed to do in order for our 
         using: <code>sed -i 's/yes/no/' /etc/default/useradd</code>
 
 * ## Libtool-2.4
+
 * ## Inetutils-1.9.4
+ 
 * ## Perl
+ 
 * ## Autoconf
+ 
 * ## Automake
+ 
 * ## Diffutils
+ 
 * ## GetText
+ 
 * ## Gperf
+ 
 * ## GROFF
 
     Configured with the following:
