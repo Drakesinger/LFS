@@ -720,4 +720,19 @@ DISTRIB_DESCRIPTION="Linux From Scratch"
 EOF
 ```
 
-Reboot, press F12, chose the 2nd disk. GRUB will automatically load the new kernel and it's components.
+## Run the new linux from scratch distribution
+
+Reboot the machine:
+```bash
+shutdown -r now
+```
+
+At the booting screen (in this case VirtualBox one):
+1. press F12
+2. chose the 2nd disk
+3. GRUB will automatically load the new kernel and it's components
+4. Login as
+	```
+	username: root
+	password: superlfs
+	```
