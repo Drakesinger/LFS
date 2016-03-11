@@ -367,6 +367,16 @@ Some of the packages however, had some changes we needed to do in order for our 
     ```
     Everything else is the same.
 
+* ## GCC
+
+    The GCC compiler has been installed following the instructions in the book.
+    The test results are located [here](.\Captures\GCC Testsuite Summary-details.txt).
+    Comparing with the results of the testsuite ran by the GCC team shows that the failed tests are not really problematic.
+    
+    Failed tests:
+    
+    ![Failed tests](.\Captures\Failed GCC tests 1.PNG)
+
 * ## Shadow configuration
     
     * left <code>GROUP=999</code> by default
