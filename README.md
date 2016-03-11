@@ -7,7 +7,7 @@ Linux From Scratch Project
 In order to share files between systems, the git program was used.
 
 Problem with git.
-```bash
+```
 WARNING: gnome-keyring:: couldn't connect to: /home/[user_name]/.cache/keyring-[generated_string]/pkcs11
 ```
 Solutions found @ [Debian Forums](https://lists.debian.org/debian-user/2014/05/msg00070.html) & [Solved Programming Problems](http://hongouru.blogspot.ch/2012/07/solved-warning-gnome-keyring-couldnt.html)
