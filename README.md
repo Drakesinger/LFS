@@ -728,6 +728,7 @@ shutdown -r now
 ```
 
 At the booting screen (in this case VirtualBox one):
+
 1. press F12
 2. chose the 2nd disk
 3. GRUB will automatically load the new kernel and it's components
