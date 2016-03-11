@@ -7,7 +7,7 @@ Linux From Scratch Project
 In order to share files between systems, the git program was used.
 
 Problem with git.
-```bash
+```
 WARNING: gnome-keyring:: couldn't connect to: /home/[user_name]/.cache/keyring-[generated_string]/pkcs11
 ```
 Solutions found @ [Debian Forums](https://lists.debian.org/debian-user/2014/05/msg00070.html) & [Solved Programming Problems](http://hongouru.blogspot.ch/2012/07/solved-warning-gnome-keyring-couldnt.html)
@@ -29,12 +29,12 @@ The **problem** : only have 1 partition and it's the bootable one.
 
 **Solution** for VM : add a new harddrive of 12GB
 
-HardDrive is located in /dev/sdb (port 2 SATA)
+Harddrive is located in /dev/sdb (port 2 SATA)
 Run: 
 ```bash
 cfdisk /dev/sdb
 ```
-And
+And then
 1. add the 10240MB partition with
 2. and the swap partition for the remaining 2GBs
 
@@ -54,7 +54,7 @@ In order to see the number of the partitions one must run:
 fdisk -l
 ```
 
-Then using the IDs of the partitions:
+Then using the IDs of the partitions (The second harddrive is located on port 2 SATA so sdb):
 ```bash
 mkfs -v -t ext4 /dev/sdb1
 mkswap /dev/sdb5
@@ -689,7 +689,7 @@ There wasn't any need for one since there are plenty of images of the virtual ma
 
 There is no way to actually read the grub.cfg file without spending too much time over it, 
 so just following the book's instructions and the fact that our LFS disk is on a 
-harddisk on sata port 1 we can just start configuring GRUB.
+harddisk on sata port 2 we can just start configuring GRUB.
 Install the GRUB files.
 ```bash
 grub-install /dev/sdb
